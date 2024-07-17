@@ -49,44 +49,5 @@
     </div>
 
     <script src="snake.js"></script>
-
-
-    <script>
-        async function fetchTopScores() {
-            try {
-                const response = await fetch('/getScores');
-                const scores = await response.json();
-                const topScoresElement = document.getElementById('topScores');
-                topScoresElement.innerHTML = '';
-                scores.forEach(score => {
-                    const li = document.createElement('li');
-                    li.textContent = `${score.name}: ${score.score}`;
-                    topScoresElement.appendChild(li);
-                });
-            } catch (error) {
-                console.error('Error fetching scores:', error);
-            }
-        }
-
-        async function saveScore(name, score) {
-            try {
-                await fetch('/saveScore', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, score })
-                });
-                fetchTopScores();
-            } catch (error) {
-                console.error('Error saving score:', error);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', fetchTopScores);
-
-        // Call saveScore('Your Name', yourScore) when the game ends and a score needs to be saved
-    </script>
-    
 </body>
 </html>
