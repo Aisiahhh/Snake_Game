@@ -38,6 +38,31 @@ function direction(event) {
     }
 }
 
+// Event listeners for direction buttons
+document.getElementById('btnUp').addEventListener('click', function() {
+    if (d != "DOWN") {
+        d = "UP";
+    }
+});
+
+document.getElementById('btnDown').addEventListener('click', function() {
+    if (d != "UP") {
+        d = "DOWN";
+    }
+});
+
+document.getElementById('btnLeft').addEventListener('click', function() {
+    if (d != "RIGHT") {
+        d = "LEFT";
+    }
+});
+
+document.getElementById('btnRight').addEventListener('click', function() {
+    if (d != "LEFT") {
+        d = "RIGHT";
+    }
+});
+
 function collision(head, array) {
     for (let i = 0; i < array.length; i++) {
         if (head.x == array[i].x && head.y == array[i].y) {
@@ -94,9 +119,7 @@ function draw() {
     snake.unshift(newHead);
 }
 
-// Initialize the game when the page loads
+// Initialize game and event listeners
 initializeGame();
-
-// Add event listeners
 document.addEventListener('keydown', direction);
 document.getElementById('resetButton').addEventListener('click', initializeGame);
