@@ -8,7 +8,7 @@ let food;
 let d;
 let game;
 let score;
-let speed = 100; // Initial speed in milliseconds
+let speed = 200; // Initial speed in milliseconds
 
 function initializeGame() {
     snake = [];
