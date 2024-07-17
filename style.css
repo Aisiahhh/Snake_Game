@@ -12,10 +12,15 @@
         }
 
         .direction-btn {
-            width: 60px; /* Increased width */
+            width: 100px; /* Increased width */
             height: 60px; /* Increased height */
             font-size: 36px; /* Increased font size */
             margin: 10px; /* Increased margin */
+        }
+        
+        #centerButton {
+            width: 80px; /* Width of the center button */
+            height: 80px; /* Height of the center button */
         }
         
         #cardBody {
@@ -58,4 +63,21 @@ footer {
 
 .fa-brands:hover, .fa-solid:hover{
 	color: blue;
+}
+
+.leaderboard {
+    text-align: left;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #090c0f;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+.sidebar .nav-link {
+    color: #333;
 }

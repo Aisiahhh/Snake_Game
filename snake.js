@@ -8,22 +8,17 @@ let food;
 let d;
 let game;
 let score;
-let speed = 200; // Initial speed in milliseconds
 
 function initializeGame() {
     snake = [];
     snake[0] = { x: 9 * box, y: 10 * box };
 
-    food = {
-        x: Math.floor(Math.random() * 19 + 1) * box,
-        y: Math.floor(Math.random() * 19 + 1) * box
-    };
-
     d = null;
     score = 0;
     updateScore();
+    generateFood(); // Generate initial food position
     clearInterval(game);
-    game = setInterval(draw, speed);
+    game = setInterval(draw, 100);
 }
 
 function direction(event) {
@@ -77,10 +72,15 @@ function updateScore() {
     scoreDisplay.innerText = "Score: " + score;
 }
 
-function updateSpeed(newSpeed) {
-    speed = newSpeed;
-    clearInterval(game);
-    game = setInterval(draw, speed);
+function generateFood() {
+    let newFood;
+    do {
+        newFood = {
+            x: Math.floor(Math.random() * 19 + 1) * box,
+            y: Math.floor(Math.random() * 19 + 1) * box
+        };
+    } while (collision(newFood, snake)); // Regenerate if food spawns on the snake's body
+    food = newFood;
 }
 
 function draw() {
@@ -108,15 +108,7 @@ function draw() {
     if (snakeX == food.x && snakeY == food.y) {
         score++;
         updateScore();
-        food = {
-            x: Math.floor(Math.random() * 19 + 1) * box,
-            y: Math.floor(Math.random() * 19 + 1) * box
-        };
-
-        // Optionally increase speed as the score increases
-        if (score % 5 == 0) {
-            updateSpeed(speed - 10); // Decrease interval to increase speed
-        }
+        generateFood(); // Generate new food position after eating
     } else {
         snake.pop();
     }
