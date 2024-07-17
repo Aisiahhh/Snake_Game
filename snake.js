@@ -8,6 +8,7 @@ let food;
 let d;
 let game;
 let score;
+let speed = 100; // Initial speed in milliseconds
 
 function initializeGame() {
     snake = [];
@@ -22,7 +23,7 @@ function initializeGame() {
     score = 0;
     updateScore();
     clearInterval(game);
-    game = setInterval(draw, 100);
+    game = setInterval(draw, speed);
 }
 
 function direction(event) {
@@ -76,6 +77,12 @@ function updateScore() {
     scoreDisplay.innerText = "Score: " + score;
 }
 
+function updateSpeed(newSpeed) {
+    speed = newSpeed;
+    clearInterval(game);
+    game = setInterval(draw, speed);
+}
+
 function draw() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -105,6 +112,11 @@ function draw() {
             x: Math.floor(Math.random() * 19 + 1) * box,
             y: Math.floor(Math.random() * 19 + 1) * box
         };
+
+        // Optionally increase speed as the score increases
+        if (score % 5 == 0) {
+            updateSpeed(speed - 10); // Decrease interval to increase speed
+        }
     } else {
         snake.pop();
     }
